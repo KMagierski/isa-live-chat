@@ -14,7 +14,6 @@ class Chat {
         firebase.auth().onAuthStateChanged(user => {
             this.user = user
             this.render()
-            console.log(user, this.user, !this.user)
         })
     }
 
@@ -60,6 +59,10 @@ class Chat {
 
         // adding new messages from this.messages class field
         this.messages.forEach(message => this.makeMessage(message))
+
+        // adding margin to last message
+        const lastMessage = document.querySelector('.message-container:last-of-type')
+        if(lastMessage) lastMessage.style.marginBottom = '79px'
 
         // displaing login form when not logged in 
         if (!this.user) this.makeLoginBox()
