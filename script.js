@@ -1,12 +1,21 @@
 class Chat {
     constructor(selector) {
         this.chatContainer = document.querySelector('selector') || document.body
-        this.user = 'ala'
+        this.user = null
         this.messages = []
         this.newMessageText = ''
 
+        this.startListeningForAuthorization()
         this.startListeningForMessages()
         this.render()
+    }
+
+    startListeningForAuthorization() {
+        firebase.auth().onAuthStateChanged(user => {
+            this.user = user
+            this.render()
+            console.log(user, this.user, !this.user)
+        })
     }
 
     startListeningForMessages() {
@@ -19,6 +28,10 @@ class Chat {
         )
     }
 
+    onLoginByGoogleClickHandler() {
+        firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    }
+
     newMessageHandler(event) {
         this.newMessageText = event.target.value
     }
@@ -26,9 +39,9 @@ class Chat {
     addMessageHandler() {
         const newMessage = {
             text: this.newMessageText,
-            name: 'Mateusz Choma',
-            email: 'mateusz.choma@infoshareacademy.com',
-            image: ''
+            name: this.user.displayName,
+            email: this.user.email,
+            image: this.user.photoURL
         }
 
         firebase.database().ref('/messages').push(newMessage)
@@ -156,6 +169,12 @@ class Chat {
         // add texts to elements
         button.innerText = 'Login by Google!'
         header.innerText = 'iSA Live Chat App'
+
+        // add event listeners
+        button.addEventListener(
+            'click',
+            () => this.onLoginByGoogleClickHandler()
+        )
 
         // put it all together
         container.appendChild(header)
