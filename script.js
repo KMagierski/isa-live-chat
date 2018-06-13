@@ -13,6 +13,11 @@ class Chat {
         this.render()
     }
 
+    newMessageHandler(event){
+        this.newMessageText = event.target.value
+        console.log(this.newMessageText)
+    }
+
     render() {
         // removing all items
         this.chatContainer.innerHTML = ''
@@ -88,6 +93,13 @@ class Chat {
         // add attributes and texts on button and input
         input.setAttribute('placeholder', 'Message text')
         button.innerText = 'Send message'
+
+        // add handlers
+        input.addEventListener(
+            'input',
+            (event) => this.newMessageHandler(event)
+        )
+        )
 
         // put it all together
         inputGroupForButton.appendChild(button)
