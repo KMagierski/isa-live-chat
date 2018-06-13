@@ -74,10 +74,11 @@ class Chat {
 
         // add CSS and CSS classes (we are using Bootstrap 4)
         container.style.cssText = `
-            position: absolute;
+            position: fixed;
             bottom: 0;
             padding: 20px;
             border-top: 1px solid rgba(0,0,0,.125);
+            background-color: #fff;
         `
         container.className = 'input-group'
         input.className = 'form-control'
