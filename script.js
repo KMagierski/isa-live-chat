@@ -15,7 +15,17 @@ class Chat {
 
     newMessageHandler(event){
         this.newMessageText = event.target.value
-        console.log(this.newMessageText)
+    }
+
+    addMessageHandler(){
+        this.messages = this.messages.concat({
+            text: this.newMessageText,
+            name: 'Mateusz Choma',
+            email: 'mateusz.choma@infoshareacademy.com',
+            image: ''
+        })
+        this.newMessageText = ''
+        this.render()
     }
 
     render() {
@@ -99,6 +109,9 @@ class Chat {
             'input',
             (event) => this.newMessageHandler(event)
         )
+        button.addEventListener(
+            'click',
+            (event) => this.addMessageHandler(event)
         )
 
         // put it all together
