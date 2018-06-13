@@ -10,20 +10,21 @@ class Chat {
         }]
         this.newMessageText = ''
 
-        this.makeUi()
+        this.render()
     }
 
     render() {
         // removing all displayed messages
         document.querySelectorAll('.message-container').forEach(message => message.remove())
 
+        // display input and button for new messages
+        this.makeMessageBox()
+
         // adding new messages from this.messages class field
         this.messages.forEach(message => this.makeMessage(message))
-    }
 
-    makeUi() {
-        this.makeMessageBox()
-        this.render()
+        // displaing login form when not logged in 
+        if(!this.user) this.makeLoginBox()
     }
 
     makeMessage(message) {
@@ -91,6 +92,38 @@ class Chat {
         inputGroupForButton.appendChild(button)
         container.appendChild(input)
         container.appendChild(inputGroupForButton)
+        this.chatContainer.appendChild(container)
+    }
+
+    makeLoginBox() {
+        // create elements
+        const container = document.createElement('div')
+        const button = document.createElement('button')
+        const header = document.createElement('h1')
+
+        // add CSS and CSS classes (we are using Bootstrap 4)
+        container.style.cssText = `
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        `
+        button.className = 'btn btn-danger'
+
+        // add texts to elements
+        button.innerText = 'Login by Google!'
+        header.innerText = 'iSA Live Chat App'
+
+        // put it all together
+        container.appendChild(header)
+        container.appendChild(button)
         this.chatContainer.appendChild(container)
     }
 }
