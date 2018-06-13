@@ -2,15 +2,21 @@ class Chat {
     constructor(selector) {
         this.chatContainer = document.querySelector('selector') || document.body
         this.user = 'ala'
-        this.messages = [{
-            text: 'Ala ma kota',
-            name: 'Mateusz Choma',
-            email: 'mateusz.choma@infoshareacademy.com',
-            image: ''
-        }]
+        this.messages = []
         this.newMessageText = ''
 
+        this.startListeningForMessages()
         this.render()
+    }
+
+    startListeningForMessages() {
+        firebase.database().ref('/messages').on(
+            'value',
+            (snapshot) => {
+                this.messages = Object.values(snapshot.val())
+                this.render()
+            }
+        )
     }
 
     newMessageHandler(event) {
