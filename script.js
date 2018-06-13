@@ -2,15 +2,28 @@ class Chat {
     constructor(selector) {
         this.chatContainer = document.querySelector('selector') || document.body
         this.user = null
-        this.messages = []
+        this.messages = [{
+            text: 'Ala ma kota',
+            name: 'Mateusz Choma',
+            email: 'mateusz.choma@infoshareacademy.com',
+            image: ''
+        }]
         this.newMessageText = ''
 
         this.makeUi()
     }
 
+    render() {
+        // removing all displayed messages
+        document.querySelectorAll('.message-container').forEach(message => message.remove())
+
+        // adding new messages from this.messages class field
+        this.messages.forEach(message => this.makeMessage(message))
+    }
+
     makeUi() {
         this.makeMessageBox()
-        this.makeMessage({ text: 'Ala ma kota', name: 'Mateusz Choma', email: 'chomamateusz@gmail.com' })
+        this.render()
     }
 
     makeMessage(message) {
@@ -36,9 +49,10 @@ class Chat {
         textContainer.style.cssText = `
             margin: 0 20px;
         `
+        messageContainer.className = 'message-container'
 
         // add attributes and texts
-        image.setAttribute('src', message.image || `https://api.adorable.io/avatars/100/${message.userName}`)
+        image.setAttribute('src', message.image || `https://api.adorable.io/avatars/100/${message.email}`)
         nameContainer.innerText = message.name
         messageTextContainer.innerText = message.text
 
