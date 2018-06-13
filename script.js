@@ -13,19 +13,23 @@ class Chat {
         this.render()
     }
 
-    newMessageHandler(event){
+    newMessageHandler(event) {
         this.newMessageText = event.target.value
     }
 
-    addMessageHandler(){
-        this.messages = this.messages.concat({
+    addMessageHandler() {
+        const newMessage = {
             text: this.newMessageText,
             name: 'Mateusz Choma',
             email: 'mateusz.choma@infoshareacademy.com',
             image: ''
-        })
-        this.newMessageText = ''
-        this.render()
+        }
+
+        firebase.database().ref('/messages').push(newMessage)
+            .then(() => {
+                this.newMessageText = ''
+                this.render()
+            })
     }
 
     render() {
@@ -39,7 +43,7 @@ class Chat {
         this.messages.forEach(message => this.makeMessage(message))
 
         // displaing login form when not logged in 
-        if(!this.user) this.makeLoginBox()
+        if (!this.user) this.makeLoginBox()
     }
 
     makeMessage(message) {
