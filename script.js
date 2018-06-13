@@ -10,6 +10,44 @@ class Chat {
 
     makeUi() {
         this.makeMessageBox()
+        this.makeMessage({ text: 'Ala ma kota', name: 'Mateusz Choma', email: 'chomamateusz@gmail.com' })
+    }
+
+    makeMessage(message) {
+        // create elements
+        const messageContainer = document.createElement('div')
+        const textContainer = document.createElement('div')
+        const nameContainer = document.createElement('h5')
+        const messageTextContainer = document.createElement('div')
+        const image = document.createElement('img')
+
+        // add CSS
+        image.style.cssText = `
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        `
+        messageContainer.style.cssText = `
+            padding: 20px;
+            border-bottom: 1px solid rgba(0,0,0,.125);
+            display: flex;
+            flex-direction: row;
+        `
+        textContainer.style.cssText = `
+            margin: 0 20px;
+        `
+
+        // add attributes and texts
+        image.setAttribute('src', message.image || `https://api.adorable.io/avatars/100/${message.userName}`)
+        nameContainer.innerText = message.name
+        messageTextContainer.innerText = message.text
+
+        // put it all together
+        textContainer.appendChild(nameContainer)
+        textContainer.appendChild(messageTextContainer)
+        messageContainer.appendChild(image)
+        messageContainer.appendChild(textContainer)
+        this.chatContainer.appendChild(messageContainer)
     }
 
     makeMessageBox() {
