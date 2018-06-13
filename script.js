@@ -1,7 +1,7 @@
 class Chat {
     constructor(selector) {
         this.chatContainer = document.querySelector('selector') || document.body
-        this.user = null
+        this.user = 'ala'
         this.messages = [{
             text: 'Ala ma kota',
             name: 'Mateusz Choma',
@@ -14,8 +14,8 @@ class Chat {
     }
 
     render() {
-        // removing all displayed messages
-        document.querySelectorAll('.message-container').forEach(message => message.remove())
+        // removing all items
+        this.chatContainer.innerHTML = ''
 
         // display input and button for new messages
         this.makeMessageBox()
