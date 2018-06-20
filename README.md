@@ -6,7 +6,7 @@ Ze względu na ograniczenia czasowe rozpoczniemy od gotowego szkieletu aplikacji
 Do spełnienia założeń potrzebujemy bazy danych i serwera odpowiadającego za autoryzację. Na potrzeby tego przykładu użyjemy Google Firebase — usługi SaaS, która umożliwia „wyklikanie” backendowych funkcjonalności, takich jak prosta baza danych czy tzw. autoryzacja third party (np. kontem Google). 
 
 Kod programu możecie znaleźć w tym repozytorium:
-- na branchy master — szkielet apki — punkt startowy dla livecodingu
-- na branchy done — całość
+- na branchu master — szkielet apki — punkt startowy dla livecodingu
+- na branchu done — całość
 
 Efekt działania jest opublikowany tutaj: http://isa-live-chat-test.surge.sh/    
