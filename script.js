@@ -1,6 +1,6 @@
 class Chat {
     constructor(selector) {
-        this.chatContainer = document.querySelector('selector') || document.body
+        this.chatContainer = document.querySelector(selector) || document.body
         this.user = 'ala'
         this.messages = [{
             text: 'Ala ma kota',
@@ -23,7 +23,7 @@ class Chat {
         // adding new messages from this.messages class field
         this.messages.forEach(message => this.makeMessage(message))
 
-        // displaing login form when not logged in 
+        // displaying login form when not logged in 
         if(!this.user) this.makeLoginBox()
     }
 
